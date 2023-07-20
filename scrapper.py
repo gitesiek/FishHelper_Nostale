@@ -1,23 +1,6 @@
-from bs4 import BeautifulSoup
 import cv2
 import requests
 import numpy as np
-
-threshold = 0.8
-
-
-def is_animation_present(template, screenshot):
-    template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
-    screenshot_gray = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
-
-    result = cv2.matchTemplate(screenshot_gray, template_gray, cv2.TM_CCOEFF_NORMED)
-
-    _, max_val, _, max_loc = cv2.minMaxLoc(result)
-
-    if max_val >= threshold:
-        return True, max_loc
-    else:
-        return False, None
 
 
 def download_image(image_url):
@@ -64,24 +47,3 @@ def extract_box_data(soup):
                 box_data.append({'Image': image, 'Name': name, 'Chance': chance})
 
     return box_data
-
-
-fishery_id = input("Type your fishery ID: ")
-url = 'https://nosapki.com/en/side_jobs/fisheries/'+fishery_id
-response = requests.get(url)
-soup = BeautifulSoup(response.content, 'html.parser')
-
-
-fish_data = extract_fish_data(soup)
-box_data = extract_box_data(soup)
-
-test = 'test_bigres.png'
-template = cv2.imread(test)
-print('start compare')
-for fish in fish_data:
-    is_present, match_loc = is_animation_present(fish['Image'], template)
-    if is_present:
-        print(fish['Name'])
-
-for box in box_data:
-    pass
