@@ -4,6 +4,7 @@ import numpy as np
 import random
 import time
 
+
 nobg_template = 'nobg_template.png'
 template = cv2.imread(nobg_template)
 threshold = 0.8
