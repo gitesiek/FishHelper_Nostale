@@ -1,8 +1,12 @@
 class InventoryItem:
-    def __init__(self, name, value, quantity):
+    def __init__(self, name, value, quantity, exp_profession):
         self.name = name
-        self.value = value
         self.quantity = quantity
+        self.value = value
+        self.exp_profession = exp_profession
+
+    def change_value(self, new_value):
+        self.value = new_value
 
     def increment_quantity(self, amount=1):
         self.quantity += amount
@@ -21,4 +25,13 @@ class Inventory:
             self.items.append(item)
 
     def get_total_value(self):
-        return sum(item.value * item.quantity for item in self.items)
+        total_value = 0
+        for item in self.items:
+            total_value += int(item.value) * item.quantity
+        return total_value
+
+    def get_total_exp_profession(self):
+        total_exp = 0
+        for item in self.items:
+            total_exp += int(item.exp_profession) * item.quantity
+        return total_exp
