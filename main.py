@@ -4,6 +4,9 @@ import numpy as np
 from bs4 import BeautifulSoup
 import requests
 import keyboard
+import time
+import datetime
+import json
 
 from game_vision import (
     choose_resolution,
@@ -81,6 +84,8 @@ def is_key_pressed(key):
 
 
 print("You can start fishing")
+start_time = time.time()
+fishing_date = datetime.datetime.now()
 while not is_key_pressed('esc'):
     screenshot = pyautogui.screenshot()
     screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
@@ -106,5 +111,32 @@ while not is_key_pressed('esc'):
             print("-------------")
             print(key_to_cast_the_line)
 
+
+end_time = time.time()
+time_spent = end_time - start_time
+print("Time spent on fishing: {:.2f} seconds".format(time_spent))
+
 print("Total value of fished items: " + str(player_inventory.get_total_value()))
 print("You gained total: " + str(player_inventory.get_total_exp_profession()) + " profession experience ")
+
+
+fishing_data = {
+    "date": fishing_date.strftime('%Y-%m-%d %H:%M:%S'),
+    "fishing_data": {
+        "time_spent_seconds": time_spent,
+        "total_value_of_items": player_inventory.get_total_value(),
+        "total_profession_experience": player_inventory.get_total_exp_profession()
+    }
+}
+
+file_path = 'fishing_data.json'
+try:
+    with open(file_path, 'r') as json_file:
+        data = json.load(json_file)
+except FileNotFoundError:
+    data = []
+
+data.append(fishing_data)
+
+with open(file_path, 'w') as json_file:
+    json.dump(data, json_file)
