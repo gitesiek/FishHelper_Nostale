@@ -1,2 +1,6 @@
 opencv-python
 pyautogui
+numpy
+beautifulsoup4
+requests
+keyboard
