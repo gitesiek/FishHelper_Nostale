@@ -2,6 +2,9 @@
 
 FishHelper_Nostale is a Python application that assists users in determining the appropriate button to press during fishing sessions. Additionally, it collects fishing session data and returns it in JSON format for further processing in another Django project.
 
+![OpenCV](https://img.shields.io/badge/OpenCV_Python-4.8.0.74-blue)
+![Beautiful_Soup](https://img.shields.io/badge/Beautiful_Soup_4-4.12.2-blue)
+
 ## Installation
 
 1. Clone the repository:
@@ -35,3 +38,7 @@ python main.py
 ## Contributing
 
 Contributions to the FishHelper_Nostale project are welcome! If you find any bugs or have suggestions for improvements, please create an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [GPL-3.0 license](https://github.com/gitesiek/FishHelper_Nostale/blob/main/LICENSE).
