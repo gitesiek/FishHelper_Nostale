@@ -45,6 +45,7 @@ player_inventory = Inventory()
 chosen_res = choose_resolution()
 template = resize_template(chosen_res, template)
 
+MISSED_FISH = InventoryItem('Missed fish', 0, 1, 0)
 
 counter = 0
 counter_limit = 2
@@ -106,7 +107,8 @@ while not is_key_pressed('esc'):
                     player_inventory.add_item(loot)
                     break
                 counter += 1
-                if counter == 60:
+                if counter == 70:
+                    player_inventory.add_item(MISSED_FISH)
                     break
             print("-------------")
             print(key_to_cast_the_line)
@@ -114,15 +116,17 @@ while not is_key_pressed('esc'):
 
 end_time = time.time()
 time_spent = end_time - start_time
-print("Time spent on fishing: {:.2f} seconds".format(time_spent))
+time_spent = '{:.2f}'.format(time_spent)
 
+print("Time spent on fishing:" + time_spent + " seconds")
 print("Total value of fished items: " + str(player_inventory.get_total_value()))
 print("You gained total: " + str(player_inventory.get_total_exp_profession()) + " profession experience ")
 
 
 fishing_data = {
     "date": fishing_date.strftime('%Y-%m-%d %H:%M:%S'),
-    "fishing_data": {
+    "fish_info": player_inventory.get_items(),
+    "summary_data": {
         "time_spent_seconds": time_spent,
         "total_value_of_items": player_inventory.get_total_value(),
         "total_profession_experience": player_inventory.get_total_exp_profession()

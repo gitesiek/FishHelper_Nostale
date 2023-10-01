@@ -5,6 +5,14 @@ class InventoryItem:
         self.value = value
         self.exp_profession = exp_profession
 
+    def get_item_info(self):
+        return {
+            'Name': self.name,
+            'Quantity': self.quantity,
+            'Value': self.value,
+            'Profession': self.exp_profession,
+            }
+
     def change_value(self, new_value):
         self.value = new_value
 
@@ -15,6 +23,12 @@ class InventoryItem:
 class Inventory:
     def __init__(self):
         self.items = []
+
+    def get_items(self):
+        items_info = []
+        for item in self.items:
+            items_info.append(item.get_item_info())
+        return items_info
 
     def add_item(self, item):
         for existing_item in self.items:
