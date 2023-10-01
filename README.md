@@ -7,7 +7,7 @@ FishHelper_Nostale is a Python application that assists users in determining the
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/FishHelper_Nostale.git
+    git clone https://github.com/gitesiek/FishHelper_Nostale.git
     cd FishHelper_Nostale
     ```
 
